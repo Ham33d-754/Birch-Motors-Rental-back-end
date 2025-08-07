@@ -38,3 +38,7 @@ exports.auth_register_post = async (req, res) => {
     res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
   }
 }
+exports.auth_checkSession_get = (req, res) => {
+  const { payload } = res.locals
+  res.status(200).send(payload)
+}
