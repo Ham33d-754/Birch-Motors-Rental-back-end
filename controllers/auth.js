@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 exports.auth_sigin_post = async (req, res) => {
-  const user = User.findOne({ username: req.body.username })
+  const user = await User.findOne({ username: req.body.username })
   if (user) {
-    const verfiy = bcrypt.compare(user.password, req.body.passwoed)
+    const verfiy = await bcrypt.compare(req.body.password, user.password)
     if (verfiy) {
       let payload = {
         id: user._id,

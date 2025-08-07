@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt')
 const methodOverride = require('method-override')
 const port = process.env.PORT ? process.env.PORT : '3000'
 
-app.use(methodOverride)
+app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
@@ -25,16 +25,21 @@ const firstAdmin = async () => {
       password,
       parseInt(process.env.SALT_ROUNDS)
     )
-    await User.create({ username: 'admin', password: hasedPassword })
+    await User.create({
+      username: 'admin',
+      password: hasedPassword,
+      role: 'admin'
+    })
     console.log('admin account created scucessfully')
   }
 }
 firstAdmin()
 
+const authRouter = require('./routes/auth')
 app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
 })
-
+app.use('/auth', authRouter)
 app.listen(process.env.port, () => {
   console.log(`app listen on port ${port}`)
 })
