@@ -17,10 +17,8 @@ exports.auth_sigin_post = async (req, res) => {
         let token = jwt.sign(payload, process.env.APP_SECRET)
         return res.status(200).send({ admin: payload, token: token })
       }
-      res
-        .status(401)
-        .send({ status: 'Error', msg: 'username/password is wrong' })
     }
+    return res.send({ status: 'Error', msg: 'username/password is wrong' })
   } catch (error) {
     res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
   }
@@ -30,10 +28,9 @@ exports.auth_register_post = async (req, res) => {
     const user = await User.create(req.body)
     if (user) {
       return res.status(200).send({ msg: 'added secusefuly' })
+    } else {
+      return res.send({ status: 'Error', msg: 'somethig went wrong' })
     }
-    res
-      .status(401)
-      .send({ status: 'Error', msg: 'username/password is required' })
   } catch (error) {
     res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
   }
