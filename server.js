@@ -28,6 +28,8 @@ const firstAdmin = async () => {
     await User.create({
       username: 'admin',
       password: hasedPassword,
+      email: 'admin@birchMotors.com',
+      phone: '34556789',
       role: 'admin'
     })
     console.log('admin account created scucessfully')
@@ -45,6 +47,10 @@ app.get('/', firstAdmin, (req, res) => {
 app.use('/auth', authRouter)
 app.use('/garage', garageRouter)
 
+
+const carRouter = require('./routes/cars')
+
+app.use('/car', carRouter)
 
 app.listen(process.env.port, () => {
   console.log(`app listen on port ${port}`)
