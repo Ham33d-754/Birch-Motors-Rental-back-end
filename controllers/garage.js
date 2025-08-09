@@ -1,0 +1,18 @@
+const Garage = require('../models/garage')
+
+exports.garage_get_all = async (req, res) => {
+  try {
+    const garages = await Garage.find()
+  } catch (error) {
+    res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
+  }
+}
+
+exports.garage_get_by_id = async (req, res) => {
+  try {
+    const garage = await Garage.findById(req.params.id)
+  } catch (error) {
+    res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
+  }
+}
+
