@@ -30,9 +30,12 @@ exports.auth_register_post = async (req, res) => {
       $or: [{ username }, { email }, { phone }]
     })
     if (user) {
-      return res.status(200).send({ msg: 'user already exsit' })
+      return res.send({ msgExists: 'user already exists' })
     } else {
-      const hasedPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS)
+      const hasedPassword = await bcrypt.hash(
+        password,
+        parseInt(process.env.SALT_ROUNDS)
+      )
       req.body.password = hasedPassword
       await User.create(req.body)
       return res.send({ status: 'Error', msg: 'somethig went wrong' })

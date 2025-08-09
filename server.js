@@ -28,6 +28,8 @@ const firstAdmin = async () => {
     await User.create({
       username: 'admin',
       password: hasedPassword,
+      email: 'admin@birchMotors.com',
+      phone: '34556789',
       role: 'admin'
     })
     console.log('admin account created scucessfully')
