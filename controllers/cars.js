@@ -4,8 +4,8 @@ require('dotenv').config()
 // removes car
 const delete_car_delete = async (req, res) => {
   try {
-    const car = await CAr.findByIdAndDelete(req.params.carid)
-    res.status(200).send(ticket)
+    const car = await Car.findByIdAndDelete(req.params.carid)
+    res.status(200).send(car)
   } catch (error) {
     res.status(500).send({ error: 'Failed to delete ticket' })
   }
