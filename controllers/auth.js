@@ -30,7 +30,11 @@ exports.auth_register_post = async (req, res) => {
       $or: [{ username }, { email }, { phone }]
     })
     if (user) {
-      return res.send({ msgExists: 'user already exists' })
+      const message =
+        res.locals.payload.role === 'admin'
+          ? 'user already exists'
+          : 'Please choose a different username, email, or phone number.'
+      return res.send({ msgExists: message })
     } else {
       const hasedPassword = await bcrypt.hash(
         password,
