@@ -42,6 +42,11 @@ app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
 })
 app.use('/auth', authRouter)
+
+const carRouter = require('./routes/cars')
+
+app.use('/car', carRouter)
+
 app.listen(process.env.port, () => {
   console.log(`app listen on port ${port}`)
 })
