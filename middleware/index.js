@@ -10,5 +10,6 @@ exports.verfiyToken = (req, res, next) => {
       return next()
     }
   }
-  res.status(401).send({ msg: 'unauthorized' })
+
+  return res.status(401).send({ msg: 'unauthorized' })
 }
