@@ -23,3 +23,13 @@ exports.garage_create_post = async (req, res) => {
     res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
   }
 }
+
+exports.garage_update_put = async (req, res) => {
+  try {
+    const updated = await Garage.findByIdAndUpdate(req.params.id, req.body, {
+      new: true
+    })
+  } catch (error) {
+    res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
+  }
+}
