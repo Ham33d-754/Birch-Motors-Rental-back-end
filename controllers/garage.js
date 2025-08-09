@@ -33,3 +33,11 @@ exports.garage_update_put = async (req, res) => {
     res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
   }
 }
+
+exports.garage_delete = async (req, res) => {
+  try {
+    const deleted = await Garage.findByIdAndDelete(req.params.id)
+  } catch (error) {
+    res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
+  }
+}
