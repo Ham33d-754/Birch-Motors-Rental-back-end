@@ -16,3 +16,10 @@ exports.garage_get_by_id = async (req, res) => {
   }
 }
 
+exports.garage_create_post = async (req, res) => {
+  try {
+    const garage = await Garage.create(req.body)
+  } catch (error) {
+    res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
+  }
+}

@@ -36,10 +36,16 @@ const firstAdmin = async () => {
 firstAdmin()
 
 const authRouter = require('./routes/auth')
+const garageRouter = require('./routes/garage')
+
 app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
 })
+
 app.use('/auth', authRouter)
+app.use('/garage', garageRouter)
+
+
 app.listen(process.env.port, () => {
   console.log(`app listen on port ${port}`)
 })
