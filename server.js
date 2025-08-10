@@ -32,7 +32,7 @@ const firstAdmin = async () => {
       phone: '34556789',
       role: 'admin'
     })
-    console.log('admin account created scucessfully')
+    console.log('admin account created successfully')
   }
 }
 firstAdmin()
