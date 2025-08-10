@@ -20,7 +20,7 @@ const carSchema = new mongoose.Schema({
     type: String,
     default: 'https://share.google/images/uUMJr6vuzd5Q8nzlRs'
   },
-  garage: { type: [{ type: mongoose.Schema.Types.ObjectId }] }
+  garage: [{type: mongoose.Schema.Types.ObjectId, ref: 'Garage'}]
 })
 const Car = mongoose.model('Car', carSchema)
 
