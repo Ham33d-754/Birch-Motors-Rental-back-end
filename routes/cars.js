@@ -1,5 +1,9 @@
 const router = require('express').Router()
 const carCTRL = require('../controllers/cars')
+// the route starts as (cars/)
+
+// all cars
+router.get('/', carCTRL.all_cars_get)
 
 // shows car
 router.get('/:carid', carCTRL.find_carId_get)
@@ -7,11 +11,11 @@ router.get('/:carid', carCTRL.find_carId_get)
 // new Car
 router.post('/new', carCTRL.create_car_post)
 
-// removes car
-router.delete('/:carid', carCTRL.delete_car_delete)
 
 // updates car
-// router.get('/:carid/edit', carCTRL.edit_car_get)
-// router.put('/:carid', carCTRL.update_car_put)
+router.put('/:carid', carCTRL.update_car_put)
+
+// removes car
+router.delete('/:carid', carCTRL.delete_car_delete)
 
 module.exports = router

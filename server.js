@@ -32,7 +32,7 @@ const firstAdmin = async () => {
       phone: '34556789',
       role: 'admin'
     })
-    console.log('admin account created scucessfully')
+    console.log('admin account created successfully')
   }
 }
 firstAdmin()
@@ -45,8 +45,8 @@ app.use('/auth', authRouter)
 
 const carRouter = require('./routes/cars')
 
-app.use('/car', carRouter)
+app.use('/cars', carRouter)
 
-app.listen(process.env.port, () => {
+app.listen(port, () => {
   console.log(`app listen on port ${port}`)
 })
