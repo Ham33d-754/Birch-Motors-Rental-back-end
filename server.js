@@ -38,14 +38,18 @@ const firstAdmin = async () => {
 firstAdmin()
 
 const authRouter = require('./routes/auth')
+const userRouter = require('./routes/user')
+const garageRouter = require('./routes/garage')
+const carRouter = require('./routes/cars')
+
 app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
 })
+// use router
 app.use('/auth', authRouter)
-
-const carRouter = require('./routes/cars')
-
-app.use('/cars', carRouter)
+app.use('/profile', userRouter)
+app.use('/garage', garageRouter)
+app.use('/car', carRouter)
 
 app.listen(port, () => {
   console.log(`app listen on port ${port}`)
