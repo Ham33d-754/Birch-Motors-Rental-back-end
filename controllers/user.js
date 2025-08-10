@@ -8,6 +8,10 @@ exports.user_getUser_get = async (req, res) => {
   const user = await User.findById(userId)
   return res.status(200).send({ user })
 }
+exports.user_getAll_get = async (req, res) => {
+  const listOfUsers = await User.find()
+  return res.status(200).send({ listOfUsers })
+}
 exports.user_editProfile_put = async (req, res) => {
   try {
     const userId = req.params.userId
