@@ -9,7 +9,7 @@ router.get('/', carCTRL.all_cars_get)
 router.get('/:carid', carCTRL.find_carId_get)
 
 // new Car
-router.post('/new', carCTRL.create_car_post)
+router.post('/', carCTRL.create_car_post)
 
 
 // updates car
