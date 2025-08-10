@@ -39,11 +39,18 @@ firstAdmin()
 
 const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user')
+const garageRouter = require('./routes/garage')
+const carRouter = require('./routes/cars')
+
 app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
 })
+
 app.use('/auth', authRouter)
 app.use('/profile', userRouter)
+app.use('/garage', garageRouter)
+app.use('/car', carRouter)
+
 app.listen(process.env.port, () => {
   console.log(`app listen on port ${port}`)
 })

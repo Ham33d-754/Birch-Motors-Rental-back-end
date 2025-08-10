@@ -12,7 +12,8 @@ exports.auth_sigin_post = async (req, res) => {
       if (verfiy) {
         let payload = {
           id: user._id,
-          role: user.role
+          role: user.role,
+          name: user.username
         }
         let token = jwt.sign(payload, process.env.APP_SECRET)
         return res.status(200).send({ admin: payload, token: token })
@@ -29,11 +30,11 @@ exports.auth_register_post = async (req, res) => {
     const user = await User.findOne({
       $or: [{ username }, { email }, { phone }]
     })
+
     if (user) {
       const message =
-        res.locals.payload.role === 'admin'
-          ? 'user already exists'
-          : 'Please choose a different username, email, or phone number.'
+        'Please choose a different username, email, or phone number.'
+      console.log(message)
       return res.send({ msgExists: message })
     } else {
       const hasedPassword = await bcrypt.hash(
@@ -42,7 +43,7 @@ exports.auth_register_post = async (req, res) => {
       )
       req.body.password = hasedPassword
       await User.create(req.body)
-      return res.send({ status: 'Error', msg: 'somethig went wrong' })
+      return res.send({ msg: 'thank you for registering' })
     }
   } catch (error) {
     res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })

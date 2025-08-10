@@ -15,7 +15,7 @@ exports.user_editProfile_put = async (req, res) => {
     const userdb = await User.findOne({
       $or: [{ username }, { email }, { phone }]
     })
-    if (userdb) {
+    if (userdb && !userdb._id.equals(userId)) {
       const message =
         res.locals.payload.role === 'admin'
           ? 'user already exists'
@@ -29,6 +29,7 @@ exports.user_editProfile_put = async (req, res) => {
         )
         req.body.password = hasedPassword
       }
+      req.body.password = userdb.password
       await User.findByIdAndUpdate(userId, req.body)
 
       return res.status(200).send({ msg: 'user is updated sucessfully' })
