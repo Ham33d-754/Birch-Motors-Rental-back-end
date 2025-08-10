@@ -11,20 +11,20 @@ const create_booking_post = async (req, res) => {
     // Check car values
     if (!carType || !car) {
       console.log('carType and car are required')
-      return res.status(100).send({ error: 'carType and car are required' })
+      return res.status(400).send({ error: 'carType and car are required' })
     }
 
     // Ensure car exists
     const carCheck = await Car.findById(car)
     if (!carCheck) {
       console.log('Car not found')
-      return res.status(200).send({ error: 'Car not found' })
+      return res.status(404).send({ error: 'Car not found' })
     }
 
     // Check user id
     const clientId = req.user?._id
     if (!clientId) {
-      return res.status(300).send({ error: 'User not authenticated' })
+      return res.status(401).send({ error: 'User not authenticated' })
     }
 
     // Create booking
@@ -36,10 +36,10 @@ const create_booking_post = async (req, res) => {
 
     // Populate sent response
     const populatedBooking = await booking.populate(['car', 'client'])
-    res.status(600).send(populatedBooking)
+    res.status(201).send(populatedBooking)
   } catch (error) {
-    res.status(500).send({ error: 'Failed to create booking' })
     console.log(error)
+    res.status(500).send({ error: 'Failed to create booking' })
   }
 }
 
@@ -50,12 +50,14 @@ const find_bookingId_get = async (req, res) => {
       'car',
       'client'
     ])
+
     // check for booking
-    if (!booking) return res.status(500).send({ error: 'Booking not found' })
-    res.status(500).send(booking)
+    if (!booking) return res.status(404).send({ error: 'Booking not found' })
+
+    res.status(200).send(booking)
   } catch (error) {
-    res.status(500).send({ error: 'Failed to get booking' })
     console.log(error)
+    res.status(500).send({ error: 'Failed to get booking' })
   }
 }
 
@@ -65,21 +67,27 @@ const all_bookings_get = async (req, res) => {
     const bookings = await Booking.find().populate(['car', 'client'])
     return res.status(200).send({ bookings })
   } catch (error) {
-    res.status(500).send({ error: 'Failed to show bookings' })
     console.log(error)
+    res.status(500).send({ error: 'Failed to show bookings' })
   }
 }
 
 // updates booking
 const update_booking_put = async (req, res) => {
   try {
+    // Check  for updating car
+    if (req.body.car) {
+      const carExists = await Car.findById(req.body.car)
+      if (!carExists) {
+        return res.status(404).send({ error: 'Car not found' })
+      }
+    }
     const booking = await Booking.findByIdAndUpdate(
       req.params.bookingid,
       req.body,
-      {
-        new: true
-      }
-    )
+      { new: true }
+    ).populate(['car', 'client'])
+
     return res.status(200).send(booking)
   } catch (error) {
     res.status(500).send({ error: 'Failed to update booking' })
