@@ -49,7 +49,7 @@ app.get('/', firstAdmin, (req, res) => {
 app.use('/auth', authRouter)
 app.use('/profile', userRouter)
 app.use('/garages', garageRouter)
-app.use('/car', carRouter)
+app.use('/cars', carRouter)
 
 app.listen(port, () => {
   console.log(`app listen on port ${port}`)
