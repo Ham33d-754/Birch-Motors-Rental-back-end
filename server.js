@@ -32,7 +32,7 @@ const firstAdmin = async () => {
       phone: '34556789',
       role: 'admin'
     })
-    console.log('admin account created scucessfully')
+    console.log('admin account created successfully')
   }
 }
 firstAdmin()
@@ -48,7 +48,7 @@ app.get('/', firstAdmin, (req, res) => {
 // use router
 app.use('/auth', authRouter)
 app.use('/profile', userRouter)
-app.use('/garage', garageRouter)
+app.use('/garages', garageRouter)
 app.use('/car', carRouter)
 
 app.listen(port, () => {
