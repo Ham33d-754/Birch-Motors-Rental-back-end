@@ -11,7 +11,9 @@ exports.garage_get_all = async (req, res) => {
 
 exports.garage_get_by_id = async (req, res) => {
   try {
+    console.log(req.params.id)
     const garage = await Garage.findById(req.params.id)
+    console.log(garage)
     return res.status(200).send({ msg: 'Created Successfly', garage })
   } catch (error) {
     res.status(401).send({ status: 'Error', msg: 'sometinhg went wrong' })
