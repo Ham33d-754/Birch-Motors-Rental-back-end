@@ -38,18 +38,17 @@ const firstAdmin = async () => {
 firstAdmin()
 
 const authRouter = require('./routes/auth')
+const userRouter = require('./routes/user')
 const garageRouter = require('./routes/garage')
+const carRouter = require('./routes/cars')
 
 app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
 })
-
+// use router
 app.use('/auth', authRouter)
+app.use('/profile', userRouter)
 app.use('/garage', garageRouter)
-
-
-const carRouter = require('./routes/cars')
-
 app.use('/car', carRouter)
 
 app.listen(process.env.port, () => {
