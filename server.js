@@ -45,7 +45,7 @@ const carRouter = require('./routes/cars')
 app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
 })
-
+// use router
 app.use('/auth', authRouter)
 app.use('/profile', userRouter)
 app.use('/garage', garageRouter)
