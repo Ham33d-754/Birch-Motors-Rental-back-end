@@ -51,6 +51,6 @@ app.use('/profile', userRouter)
 app.use('/garage', garageRouter)
 app.use('/car', carRouter)
 
-app.listen(process.env.port, () => {
+app.listen(port, () => {
   console.log(`app listen on port ${port}`)
 })
