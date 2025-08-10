@@ -43,7 +43,14 @@ const all_cars_get = async (req, res) => {
     console.log(error)
   }
 }
-
+const all_garageCars_get = async (req, res) => {
+  const garageId = req.params.garageId
+  const cars = await Car.find({ garage: garageId })
+  if (cars) {
+    return res.status(200).send({ cars })
+  }
+  return res.status(401).send({ msg: 'unauthorized' })
+}
 // updates car
 const update_car_put = async (req, res) => {
   try {
@@ -62,5 +69,6 @@ module.exports = {
   create_car_post,
   find_carId_get,
   all_cars_get,
-  update_car_put
+  update_car_put,
+  all_garageCars_get
 }
