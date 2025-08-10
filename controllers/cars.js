@@ -7,7 +7,7 @@ const delete_car_delete = async (req, res) => {
     const car = await Car.findByIdAndDelete(req.params.carid)
     res.status(200).send(car)
   } catch (error) {
-    res.status(500).send({ error: 'Failed to delete ticket' })
+    res.status(500).send({ error: 'Failed to delete car' })
   }
 }
 
