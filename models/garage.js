@@ -9,3 +9,5 @@ const garageSchema = new mongoose.Schema({
 const Garage = mongoose.model('Garage', garageSchema)
 
 module.exports = Garage
+
+// the garage needs and array of cars

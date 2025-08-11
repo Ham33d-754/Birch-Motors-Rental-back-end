@@ -32,7 +32,7 @@ const firstAdmin = async () => {
       phone: '34556789',
       role: 'admin'
     })
-    console.log('admin account created scucessfully')
+    console.log('admin account created successfully')
   }
 }
 firstAdmin()
@@ -41,6 +41,7 @@ const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user')
 const garageRouter = require('./routes/garage')
 const carRouter = require('./routes/cars')
+const bookingRouter = require('./routes/bookings')
 
 app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
@@ -49,7 +50,8 @@ app.get('/', firstAdmin, (req, res) => {
 app.use('/auth', authRouter)
 app.use('/profile', userRouter)
 app.use('/garages', garageRouter)
-app.use('/car', carRouter)
+app.use('/carss', carRouter)
+app.use('/bookings', bookingRouter)
 
 app.listen(port, () => {
   console.log(`app listen on port ${port}`)
