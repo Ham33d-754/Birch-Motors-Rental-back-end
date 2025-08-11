@@ -42,7 +42,7 @@ const userRouter = require('./routes/user')
 const garageRouter = require('./routes/garage')
 const carRouter = require('./routes/cars')
 const bookingRouter = require('./routes/bookings')
-
+const reviewRouter = require('./routes/reviews')
 app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
 })
@@ -50,9 +50,10 @@ app.get('/', firstAdmin, (req, res) => {
 app.use('/auth', authRouter)
 app.use('/profile', userRouter)
 app.use('/garages', garageRouter)
-app.use('/carss', carRouter)
+app.use('/cars', carRouter)
 app.use('/bookings', bookingRouter)
-
+app.use('/reviews', reviewRouter)
+//
 app.listen(port, () => {
   console.log(`app listen on port ${port}`)
 })
