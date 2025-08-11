@@ -1,5 +1,4 @@
 const Booking = require('../models/booking')
-const User = require('../models/user')
 const Car = require('../models/car')
 require('dotenv').config()
 

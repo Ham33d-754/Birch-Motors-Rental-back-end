@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const reviewSchema = new mongoose.Schema({
-  Rating: { type: Number },
-  Comment: { type: String },
+  rating: { type: Number },
+  comment: { type: String },
   car: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Car'
@@ -14,3 +14,5 @@ const reviewSchema = new mongoose.Schema({
 })
 
 const Review = mongoose.model('Review', reviewSchema)
+
+module.exports = Review
