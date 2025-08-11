@@ -6,12 +6,12 @@ require('dotenv').config()
 // new booking
 const create_booking_post = async (req, res) => {
   try {
-    const { carType, car } = req.body
+    const { payMethod, car } = req.body
 
-    // Check car values
-    if (!carType || !car) {
-      console.log('carType and car are required')
-      return res.status(400).send({ error: 'carType and car are required' })
+    // Check body values
+    if (!payMethod || !car) {
+      console.log('payMethod and car are required')
+      return res.status(400).send({ error: 'payMethod and car are required' })
     }
 
     // Ensure car exists
@@ -22,20 +22,20 @@ const create_booking_post = async (req, res) => {
     }
 
     // Check user id
-    const clientId = req.user?._id
-    if (!clientId) {
+    const userId = req.user?._id
+    if (!userId) {
       return res.status(401).send({ error: 'User not authenticated' })
     }
 
     // Create booking
     const booking = await Booking.create({
-      carType,
+      payMethod,
       car,
-      client: clientId
+      user: userId
     })
 
     // Populate sent response
-    const populatedBooking = await booking.populate(['car', 'client'])
+    const populatedBooking = await booking.populate(['car', 'user'])
     res.status(201).send(populatedBooking)
   } catch (error) {
     console.log(error)
@@ -48,7 +48,7 @@ const find_bookingId_get = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.bookingid).populate([
       'car',
-      'client'
+      'user'
     ])
 
     // check for booking
@@ -64,7 +64,7 @@ const find_bookingId_get = async (req, res) => {
 // all bookings
 const all_bookings_get = async (req, res) => {
   try {
-    const bookings = await Booking.find().populate(['car', 'client'])
+    const bookings = await Booking.find().populate(['car', 'user'])
     return res.status(200).send({ bookings })
   } catch (error) {
     console.log(error)
@@ -86,7 +86,7 @@ const update_booking_put = async (req, res) => {
       req.params.bookingid,
       req.body,
       { new: true }
-    ).populate(['car', 'client'])
+    ).populate(['car', 'user'])
 
     return res.status(200).send(booking)
   } catch (error) {

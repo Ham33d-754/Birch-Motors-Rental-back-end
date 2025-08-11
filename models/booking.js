@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 //
 const bookingSchema = new mongoose.Schema({
-  carType: {
+  payMethod: {
     type: String,
     enum: ['Check', 'Card', 'Third Party']
   },
@@ -10,7 +10,7 @@ const bookingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Car'
   },
-  client: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
