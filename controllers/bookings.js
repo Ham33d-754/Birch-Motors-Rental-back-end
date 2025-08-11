@@ -33,8 +33,8 @@ const create_booking_post = async (req, res) => {
       user: userId
     })
 
-    carCheck.updateOne({ isRented: true })
-    carCheck.save()
+    await carCheck.updateOne({ Rented: true })
+    await carCheck.save()
 
     // Populate sent response
     // const populatedBooking = await booking.populate(['car', 'user'])
