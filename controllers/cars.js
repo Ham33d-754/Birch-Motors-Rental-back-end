@@ -26,11 +26,17 @@ const find_carId_get = async (req, res) => {
 // new Car
 const create_car_post = async (req, res) => {
   try {
-    const { image } = req.body
+    const { image, pricePerHour } = req.body
     if (!image) {
       req.body.image =
         'https://www.seat.com.mt/content/dam/public/seat-website/carworlds/compare/default-image/ghost.png'
     }
+    if (!pricePerHour) {
+      req.body.pricePerHour = 1
+    } else {
+      req.body.pricePerHour = parseInt(pricePerHour)
+    }
+
     const car = await Car.create({ ...req.body })
 
     res.status(200).send({ msg: 'car added successfully', car })
