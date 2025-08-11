@@ -63,7 +63,8 @@ const find_bookingId_get = async (req, res) => {
 // all bookings
 const all_bookings_get = async (req, res) => {
   try {
-    const bookings = await Booking.find().populate(['car', 'user'])
+    const bookings = await Booking.find()
+    // .populate(['car', 'user'])
     return res.status(200).send({ bookings })
   } catch (error) {
     console.log(error)
@@ -85,7 +86,8 @@ const update_booking_put = async (req, res) => {
       req.params.bookingid,
       req.body,
       { new: true }
-    ).populate(['car', 'user'])
+    )
+    // .populate(['car', 'user'])
 
     return res.status(200).send(booking)
   } catch (error) {

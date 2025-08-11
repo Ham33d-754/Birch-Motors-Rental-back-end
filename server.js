@@ -52,7 +52,7 @@ app.use('/profile', userRouter)
 app.use('/garages', garageRouter)
 app.use('/cars', carRouter)
 app.use('/bookings', bookingRouter)
-app.use('./reviews', reviewRouter)
+app.use('/reviews', reviewRouter)
 //
 app.listen(port, () => {
   console.log(`app listen on port ${port}`)
