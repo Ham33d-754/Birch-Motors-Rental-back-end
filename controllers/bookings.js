@@ -1,5 +1,4 @@
 const Booking = require('../models/booking')
-const User = require('../models/user')
 const Car = require('../models/car')
 require('dotenv').config()
 
@@ -35,8 +34,8 @@ const create_booking_post = async (req, res) => {
     })
 
     // Populate sent response
-    const populatedBooking = await booking.populate(['car', 'user'])
-    res.status(201).send(populatedBooking)
+    // const populatedBooking = await booking.populate(['car', 'user'])
+    res.status(201).send(booking)
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Failed to create booking' })
@@ -64,7 +63,8 @@ const find_bookingId_get = async (req, res) => {
 // all bookings
 const all_bookings_get = async (req, res) => {
   try {
-    const bookings = await Booking.find().populate(['car', 'user'])
+    const bookings = await Booking.find()
+    // .populate(['car', 'user'])
     return res.status(200).send({ bookings })
   } catch (error) {
     console.log(error)
@@ -86,7 +86,8 @@ const update_booking_put = async (req, res) => {
       req.params.bookingid,
       req.body,
       { new: true }
-    ).populate(['car', 'user'])
+    )
+    // .populate(['car', 'user'])
 
     return res.status(200).send(booking)
   } catch (error) {
