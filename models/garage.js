@@ -4,14 +4,7 @@ const garageSchema = new mongoose.Schema({
   name: { type: String, required: true },
   location: { type: String, required: true },
   // add to ERD 
-  cars: {
-    type: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Car'
-      }
-    ]
-  }
+  cars: [{type: mongoose.Schema.Types.ObjectId, ref: 'Car'}]
 })
 
 const Garage = mongoose.model('Garage', garageSchema)
