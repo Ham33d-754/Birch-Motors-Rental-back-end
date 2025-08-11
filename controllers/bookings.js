@@ -35,8 +35,8 @@ const create_booking_post = async (req, res) => {
     })
 
     // Populate sent response
-    const populatedBooking = await booking.populate(['car', 'user'])
-    res.status(201).send(populatedBooking)
+    // const populatedBooking = await booking.populate(['car', 'user'])
+    res.status(201).send(booking)
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Failed to create booking' })
