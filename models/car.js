@@ -19,7 +19,8 @@ const carSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: 'https://share.google/images/uUMJr6vuzd5Q8nzlRs'
+      default:
+        'https://www.seat.com.mt/content/dam/public/seat-website/carworlds/compare/default-image/ghost.png'
     },
     garage: {
       type: mongoose.Schema.Types.ObjectId,

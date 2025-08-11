@@ -32,8 +32,9 @@ exports.user_editProfile_put = async (req, res) => {
           parseInt(process.env.SALT_ROUNDS)
         )
         req.body.password = hasedPassword
+      } else {
+        req.body.password = userdb.password
       }
-      req.body.password = userdb.password
       await User.findByIdAndUpdate(userId, req.body)
 
       return res.status(200).send({ msg: 'user is updated sucessfully' })

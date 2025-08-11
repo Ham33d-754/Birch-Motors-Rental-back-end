@@ -4,7 +4,7 @@ const carCTRL = require('../controllers/cars')
 
 // all cars
 router.get('/', carCTRL.all_cars_get)
-router.get('/:garageId', carCTRL.all_garageCars_get)
+router.get('/garage/:garageId', carCTRL.all_garageCars_get)
 
 // shows car
 router.get('/:carid', carCTRL.find_carId_get)
