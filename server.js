@@ -50,7 +50,7 @@ app.get('/', firstAdmin, (req, res) => {
 app.use('/auth', authRouter)
 app.use('/profile', userRouter)
 app.use('/garages', garageRouter)
-app.use('/cars', carRouter)
+app.use('/carss', carRouter)
 app.use('/bookings', bookingRouter)
 
 app.listen(port, () => {
