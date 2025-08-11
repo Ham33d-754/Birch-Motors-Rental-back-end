@@ -22,7 +22,7 @@ const create_booking_post = async (req, res) => {
     }
 
     // Check user id
-    const userId = req.user?._id
+    const userId = req.body.user
     if (!userId) {
       return res.status(401).send({ error: 'User not authenticated' })
     }

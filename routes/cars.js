@@ -11,10 +11,6 @@ router.get('/:carid', carCTRL.find_carId_get)
 
 // new Car
 router.post('/', carCTRL.create_car_post)
-<<<<<<< HEAD
-
-=======
->>>>>>> 3f7390255d2a99b6a8fc887ac2eabc8dc5376740
 
 // updates car
 router.put('/:carid', carCTRL.update_car_put)
