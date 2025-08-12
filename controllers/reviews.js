@@ -6,10 +6,13 @@ require('dotenv').config()
 const create_review_post = async (req, res) => {
   try {
     const { rating, comment, car } = req.body
-
     // Check body values
     if (!rating || !comment || !car) {
       console.log('payMethod and car are required')
+      console.log(car)
+      console.log(comment)
+      console.log(rating)
+
       return res.status(400).send({ error: 'payMethod and car are required' })
     }
 
@@ -19,12 +22,14 @@ const create_review_post = async (req, res) => {
       console.log('Car not found')
       return res.status(404).send({ error: 'Car not found' })
     }
-
+    console.log("hellop")
+    
     // Check user id
-    const userId = req.body.user
+    const userId = res.locals.payload.id
     if (!userId) {
       return res.status(401).send({ error: 'User not authenticated' })
     }
+    console.log("ee")
 
     // Create review
     const review = await Review.create({
@@ -33,6 +38,8 @@ const create_review_post = async (req, res) => {
       car,
       user: userId
     })
+
+    console.log(review)
 
     res.status(201).send(review)
   } catch (error) {
