@@ -67,9 +67,13 @@ const find_bookingId_get = async (req, res) => {
 // all bookings
 const all_bookings_get = async (req, res) => {
   try {
-    const bookings = await Booking.find()
-    // .populate(['car', 'user'])
-    return res.status(200).send({ bookings })
+    const user = res.locals.payload
+    if (user) {
+      const bookings = await Booking.find({ user: user.id })
+      return res.status(200).send({ bookings })
+    } else {
+      return res.status(401).send({ mgs: 'unauthorized' })
+    }
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Failed to show bookings' })
