@@ -6,11 +6,11 @@ const cors = require('cors')
 const app = express()
 const User = require('./models/user')
 const bcrypt = require('bcrypt')
-
+const Stripe = require('stripe')
 //middleware
 const methodOverride = require('method-override')
 const port = process.env.PORT ? process.env.PORT : '3000'
-
+const stripe = Stripe(process.env.STRIP_SECERT_KEY)
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -53,7 +53,24 @@ app.use('/garages', garageRouter)
 app.use('/cars', carRouter)
 app.use('/bookings', bookingRouter)
 app.use('/reviews', reviewRouter)
-//
+app.post('/create-payment', async (req, res) => {
+  try {
+    // Create a payment intent
+    const paymentIntent = await stripe.paymentIntents.create({
+      currency: 'EUR',
+      amount: req.body.amount, // Amount in cents
+      automatic_payment_methods: { enabled: true }
+    })
+
+    // Send the client secret to the client
+    res.status(200).send({ clientSecret: paymentIntent.client_secret })
+  } catch (error) {
+    console.error('Error creating payment intent:', error)
+    res.status(500).send({ msg: 'Something went wrong', error: error.message })
+    //
+  }
+})
+
 app.listen(port, () => {
   console.log(`app listen on port ${port}`)
 })
