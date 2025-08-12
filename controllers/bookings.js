@@ -5,7 +5,8 @@ require('dotenv').config()
 // new booking
 const create_booking_post = async (req, res) => {
   try {
-    const { payMethod, car } = req.body
+    const { payMethod, car, amount, hours } = req.body
+    console.log(req.body)
 
     // Check body values
     if (!payMethod || !car) {
@@ -30,14 +31,14 @@ const create_booking_post = async (req, res) => {
     const booking = await Booking.create({
       payMethod,
       car,
+      amount,
+      hours,
       user: userId
     })
 
-    carCheck.updateOne({ isRented: true })
-    carCheck.save()
+    await carCheck.updateOne({ Rented: true })
+    await carCheck.save()
 
-    // Populate sent response
-    // const populatedBooking = await booking.populate(['car', 'user'])
     res.status(201).send(booking)
   } catch (error) {
     console.log(error)
