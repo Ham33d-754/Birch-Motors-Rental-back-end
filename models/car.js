@@ -20,7 +20,7 @@ const carSchema = new mongoose.Schema({
     default:
       'https://www.seat.com.mt/content/dam/public/seat-website/carworlds/compare/default-image/ghost.png'
   },
-  // add to ERD
+
   pricePerHour: {
     type: Number,
     default: 1

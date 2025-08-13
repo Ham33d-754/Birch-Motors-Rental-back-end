@@ -1,4 +1,4 @@
-//rquire
+// requires
 const express = require('express')
 const mongoose = require('./config/db')
 require('dotenv').config()
@@ -7,7 +7,8 @@ const app = express()
 const User = require('./models/user')
 const bcrypt = require('bcrypt')
 const Stripe = require('stripe')
-//middleware
+
+// middlewares
 const methodOverride = require('method-override')
 const port = process.env.PORT ? process.env.PORT : '3000'
 const stripe = Stripe(process.env.STRIP_SECERT_KEY)
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
 
+// super user
 const firstAdmin = async () => {
   const admin = await User.findOne({ username: 'admin' })
 
@@ -37,6 +39,7 @@ const firstAdmin = async () => {
 }
 firstAdmin()
 
+// Routers
 const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user')
 const garageRouter = require('./routes/garage')
@@ -46,13 +49,16 @@ const reviewRouter = require('./routes/reviews')
 app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
 })
-// use router
+
+// used router
 app.use('/auth', authRouter)
 app.use('/profile', userRouter)
 app.use('/garages', garageRouter)
 app.use('/cars', carRouter)
 app.use('/bookings', bookingRouter)
 app.use('/reviews', reviewRouter)
+
+// Payment API
 app.post('/create-payment', async (req, res) => {
   try {
     // Create a payment intent
@@ -67,10 +73,11 @@ app.post('/create-payment', async (req, res) => {
   } catch (error) {
     console.error('Error creating payment intent:', error)
     res.status(500).send({ msg: 'Something went wrong', error: error.message })
-    //
   }
 })
+// Payment API
 
+// LIVE PORT
 app.listen(port, () => {
   console.log(`app listen on port ${port}`)
 })

@@ -34,7 +34,6 @@ exports.auth_register_post = async (req, res) => {
     if (user) {
       const message =
         'Please choose a different username, email, or phone number.'
-      console.log(message)
       return res.send({ msgExists: message })
     } else {
       const hasedPassword = await bcrypt.hash(

@@ -6,7 +6,6 @@ require('dotenv').config()
 const create_booking_post = async (req, res) => {
   try {
     const { payMethod, car, amount, hours } = req.body
-    console.log(req.body)
 
     // Check body values
     if (!payMethod || !car) {
