@@ -5,6 +5,7 @@ require('dotenv').config()
 // new review
 const create_review_post = async (req, res) => {
   try {
+    console.log(req.body)
     const { rating, comment, car } = req.body
 
     // Check body values
@@ -21,10 +22,7 @@ const create_review_post = async (req, res) => {
     }
 
     // Check user id
-    const userId = req.body.user
-    if (!userId) {
-      return res.status(401).send({ error: 'User not authenticated' })
-    }
+    const userId = res.locals.payload.id
 
     // Create review
     const review = await Review.create({
@@ -34,7 +32,7 @@ const create_review_post = async (req, res) => {
       user: userId
     })
 
-    res.status(201).send(review)
+    res.status(201).send({ msg: 'created successfully' })
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Failed to create review' })
@@ -44,7 +42,8 @@ const create_review_post = async (req, res) => {
 // shows review
 const find_reviewId_get = async (req, res) => {
   try {
-    const review = await Review.findById(req.params.reviewid)
+    const carId = req.params.carId
+    const review = await Review.find({ car: carId })
 
     // check for review
     if (!review) return res.status(404).send({ error: 'review not found' })
@@ -71,6 +70,7 @@ const all_reviews_get = async (req, res) => {
 const update_review_put = async (req, res) => {
   try {
     // Check  for updating car
+    console.log(req.body)
     if (req.body.car) {
       const carExists = await Review.findById(req.body.car)
       if (!carExists) {

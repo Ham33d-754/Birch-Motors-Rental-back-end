@@ -10,7 +10,7 @@ router.post('/', verfiyToken, reviewCTRL.create_review_post)
 router.get('/', verfiyToken, reviewCTRL.all_reviews_get)
 
 // shows review
-router.get('/:reviewid', verfiyToken, reviewCTRL.find_reviewId_get)
+router.get('/:carId', verfiyToken, reviewCTRL.find_reviewId_get)
 
 // updates review
 router.put('/:reviewid', verfiyToken, reviewCTRL.update_review_put)

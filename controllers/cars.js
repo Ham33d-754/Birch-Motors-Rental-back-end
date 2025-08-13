@@ -1,4 +1,5 @@
 const Car = require('../models/car')
+const Garage = require('../models/garage')
 require('dotenv').config()
 
 // removes car
@@ -15,8 +16,9 @@ const delete_car_delete = async (req, res) => {
 const find_carId_get = async (req, res) => {
   try {
     const car = await Car.findById(req.params.carid)
+    const garage = await Garage.findById(car.garage)
     console.log(car)
-    res.status(200).send({ car })
+    res.status(200).send({ car: car, garage: garage })
   } catch (error) {
     res.status(500).send({ error: 'Failed to get car' })
     console.log(error)
@@ -67,13 +69,38 @@ const all_garageCars_get = async (req, res) => {
 // updates car
 const update_car_put = async (req, res) => {
   try {
-    const car = await Car.findByIdAndUpdate(req.params.carid, req.body, {
-      new: true
-    })
-    return res.status(200).send(car)
+    console.log(req.body)
+    const { pricePerHour, image } = req.body
+    if (!image) {
+      req.body.image =
+        'https://www.seat.com.mt/content/dam/public/seat-website/carworlds/compare/default-image/ghost.png'
+    }
+    if (!pricePerHour) {
+      req.body.pricePerHour = 1
+    } else {
+      req.body.pricePerHour = parseInt(pricePerHour)
+    }
+
+    const car = await Car.findByIdAndUpdate(req.params.carid, req.body)
+
+    return res.status(200).send({ msg: 'updated successfully' })
   } catch (error) {
     res.status(500).send({ error: 'Failed to update car' })
     console.log(error)
+  }
+}
+
+const update_carRented_put = async (req, res) => {
+  try {
+    console.log(req.body)
+    const carId = req.params.carid
+    const car = await Car.findById(carId)
+    await car.updateOne({ Rented: req.body.Rented })
+    await car.save()
+    console.log(car)
+    return res.status(200).send(car)
+  } catch (error) {
+    res.send({ msg: 'something went wrong' })
   }
 }
 
@@ -83,5 +110,6 @@ module.exports = {
   find_carId_get,
   all_cars_get,
   update_car_put,
-  all_garageCars_get
+  all_garageCars_get,
+  update_carRented_put
 }
