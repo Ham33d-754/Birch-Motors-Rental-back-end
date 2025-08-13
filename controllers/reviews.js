@@ -5,9 +5,7 @@ require('dotenv').config()
 // new review
 const create_review_post = async (req, res) => {
   try {
-    console.log(req.body)
     const { rating, comment, car } = req.body
-
     // Check body values
     if (!rating || !comment || !car) {
       console.log('payMethod and car are required')
@@ -31,7 +29,6 @@ const create_review_post = async (req, res) => {
       car,
       user: userId
     })
-
     res.status(201).send({ msg: 'created successfully' })
   } catch (error) {
     console.log(error)
@@ -70,7 +67,6 @@ const all_reviews_get = async (req, res) => {
 const update_review_put = async (req, res) => {
   try {
     // Check  for updating car
-    console.log(req.body)
     if (req.body.car) {
       const carExists = await Review.findById(req.body.car)
       if (!carExists) {

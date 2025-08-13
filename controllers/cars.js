@@ -17,7 +17,6 @@ const find_carId_get = async (req, res) => {
   try {
     const car = await Car.findById(req.params.carid)
     const garage = await Garage.findById(car.garage)
-    console.log(car)
     res.status(200).send({ car: car, garage: garage })
   } catch (error) {
     res.status(500).send({ error: 'Failed to get car' })
@@ -69,7 +68,6 @@ const all_garageCars_get = async (req, res) => {
 // updates car
 const update_car_put = async (req, res) => {
   try {
-    console.log(req.body)
     const { pricePerHour, image } = req.body
     if (!image) {
       req.body.image =
@@ -92,12 +90,10 @@ const update_car_put = async (req, res) => {
 
 const update_carRented_put = async (req, res) => {
   try {
-    console.log(req.body)
     const carId = req.params.carid
     const car = await Car.findById(carId)
     await car.updateOne({ Rented: req.body.Rented })
     await car.save()
-    console.log(car)
     return res.status(200).send(car)
   } catch (error) {
     res.send({ msg: 'something went wrong' })

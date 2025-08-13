@@ -2,9 +2,9 @@ const User = require('../models/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
+
 exports.user_getUser_get = async (req, res) => {
   const userId = req.params.userId
-  console.log(userId)
   const user = await User.findById(userId)
   return res.status(200).send({ user })
 }
