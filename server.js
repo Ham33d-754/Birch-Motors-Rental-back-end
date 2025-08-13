@@ -43,6 +43,7 @@ const garageRouter = require('./routes/garage')
 const carRouter = require('./routes/cars')
 const bookingRouter = require('./routes/bookings')
 const reviewRouter = require('./routes/reviews')
+const stripRouter = require('./routes/strip')
 app.get('/', firstAdmin, (req, res) => {
   res.send('connected')
 })
@@ -53,23 +54,7 @@ app.use('/garages', garageRouter)
 app.use('/cars', carRouter)
 app.use('/bookings', bookingRouter)
 app.use('/reviews', reviewRouter)
-app.post('/create-payment', async (req, res) => {
-  try {
-    // Create a payment intent
-    const paymentIntent = await stripe.paymentIntents.create({
-      currency: 'EUR',
-      amount: req.body.amount, // Amount in cents
-      automatic_payment_methods: { enabled: true }
-    })
-
-    // Send the client secret to the client
-    res.status(200).send({ clientSecret: paymentIntent.client_secret })
-  } catch (error) {
-    console.error('Error creating payment intent:', error)
-    res.status(500).send({ msg: 'Something went wrong', error: error.message })
-    //
-  }
-})
+app.use('/strip', stripRouter)
 
 app.listen(port, () => {
   console.log(`app listen on port ${port}`)
