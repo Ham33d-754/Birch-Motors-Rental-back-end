@@ -2,6 +2,9 @@ const Garage = require('../models/garage')
 
 exports.garage_get_all = async (req, res) => {
   try {
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     const garages = await Garage.find()
     return res.status(200).send({ msg: 'Created Successfly', garages })
   } catch (error) {
@@ -11,6 +14,9 @@ exports.garage_get_all = async (req, res) => {
 
 exports.garage_get_by_id = async (req, res) => {
   try {
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     const garage = await Garage.findById(req.params.id).populate('cars')
     return res.status(200).send({ msg: 'Created Successfly', garage })
   } catch (error) {
@@ -20,6 +26,9 @@ exports.garage_get_by_id = async (req, res) => {
 
 exports.garage_create_post = async (req, res) => {
   try {
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     const garage = await Garage.create(req.body)
     return res.status(200).send({ msg: 'Created Successfly' })
   } catch (error) {
@@ -29,6 +38,9 @@ exports.garage_create_post = async (req, res) => {
 
 exports.garage_update_put = async (req, res) => {
   try {
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     const updated = await Garage.findByIdAndUpdate(req.params.id, req.body, {
       new: true
     })
@@ -40,6 +52,9 @@ exports.garage_update_put = async (req, res) => {
 
 exports.garage_delete = async (req, res) => {
   try {
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     const deleted = await Garage.findByIdAndDelete(req.params.id)
     return res.status(200).send({ msg: 'Created Successfly' })
   } catch (error) {
