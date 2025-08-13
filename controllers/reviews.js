@@ -7,10 +7,13 @@ const create_review_post = async (req, res) => {
   try {
     console.log(req.body)
     const { rating, comment, car } = req.body
-
     // Check body values
     if (!rating || !comment || !car) {
       console.log('payMethod and car are required')
+      console.log(car)
+      console.log(comment)
+      console.log(rating)
+
       return res.status(400).send({ error: 'payMethod and car are required' })
     }
 
@@ -20,7 +23,8 @@ const create_review_post = async (req, res) => {
       console.log('Car not found')
       return res.status(404).send({ error: 'Car not found' })
     }
-
+    console.log("hellop")
+    
     // Check user id
     const userId = res.locals.payload.id
 
@@ -33,6 +37,7 @@ const create_review_post = async (req, res) => {
     })
 
     res.status(201).send({ msg: 'created successfully' })
+
   } catch (error) {
     console.log(error)
     res.status(500).send({ error: 'Failed to create review' })

@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const reviewCTRL = require('../controllers/reviews')
 const { verfiyToken } = require('../middleware')
-// the route starts as (reviews/)
+// the route starts as (/reviews)
 
 // new review
 router.post('/', verfiyToken, reviewCTRL.create_review_post)
