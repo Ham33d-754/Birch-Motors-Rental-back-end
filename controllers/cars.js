@@ -5,8 +5,11 @@ require('dotenv').config()
 // removes car
 const delete_car_delete = async (req, res) => {
   try {
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     const car = await Car.findByIdAndDelete(req.params.carid)
-    res.status(200).send(car)
+    return res.status(200).send(car)
   } catch (error) {
     res.status(500).send({ error: 'Failed to delete car' })
   }
@@ -17,7 +20,7 @@ const find_carId_get = async (req, res) => {
   try {
     const car = await Car.findById(req.params.carid)
     const garage = await Garage.findById(car.garage)
-    res.status(200).send({ car: car, garage: garage })
+    return res.status(200).send({ car: car, garage: garage })
   } catch (error) {
     res.status(500).send({ error: 'Failed to get car' })
     console.log(error)
@@ -27,6 +30,9 @@ const find_carId_get = async (req, res) => {
 // new Car
 const create_car_post = async (req, res) => {
   try {
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     const { image, pricePerHour } = req.body
     if (!image) {
       req.body.image =
@@ -68,6 +74,9 @@ const all_garageCars_get = async (req, res) => {
 // updates car
 const update_car_put = async (req, res) => {
   try {
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     const { pricePerHour, image } = req.body
     if (!image) {
       req.body.image =
@@ -90,6 +99,9 @@ const update_car_put = async (req, res) => {
 
 const update_carRented_put = async (req, res) => {
   try {
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     const carId = req.params.carid
     const car = await Car.findById(carId)
     await car.updateOne({ Rented: req.body.Rented })

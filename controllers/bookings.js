@@ -89,6 +89,9 @@ const all_bookings_get = async (req, res) => {
 const update_booking_put = async (req, res) => {
   try {
     // Check  for updating car
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     if (req.body.car) {
       const carExists = await Car.findById(req.body.car)
       if (!carExists) {
@@ -111,6 +114,9 @@ const update_booking_put = async (req, res) => {
 // removes booking
 const delete_booking_delete = async (req, res) => {
   try {
+    if (res.locals.payload.role === 'user' || !res.locals.payload.role) {
+      return res.status(401).send({ msg: 'something went worng!!' })
+    }
     const booking = await Booking.findByIdAndDelete(req.params.bookingid)
     res.status(200).send(booking)
   } catch (error) {
