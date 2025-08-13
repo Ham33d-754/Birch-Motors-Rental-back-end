@@ -69,8 +69,14 @@ const all_bookings_get = async (req, res) => {
   try {
     const user = res.locals.payload
     if (user) {
+      const bookingDetails = []
       const bookings = await Booking.find({ user: user.id })
-      return res.status(200).send({ bookings })
+      for (const booking of bookings) {
+        const car = await Car.findById(booking.car)
+        bookingDetails.push({ booking: booking, car: car })
+      }
+
+      return res.status(200).send({ bookingDetails: bookingDetails })
     } else {
       return res.status(401).send({ mgs: 'unauthorized' })
     }
@@ -95,7 +101,6 @@ const update_booking_put = async (req, res) => {
       req.body,
       { new: true }
     )
-    // .populate(['car', 'user'])
 
     return res.status(200).send(booking)
   } catch (error) {

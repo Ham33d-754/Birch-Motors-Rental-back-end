@@ -15,6 +15,7 @@ router.post('/', verfiyToken, carCTRL.create_car_post)
 
 // updates car
 router.put('/:carid', verfiyToken, carCTRL.update_car_put)
+router.put('/:carid/rented', verfiyToken, carCTRL.update_carRented_put)
 
 // removes car
 router.delete('/:carid', verfiyToken, carCTRL.delete_car_delete)
