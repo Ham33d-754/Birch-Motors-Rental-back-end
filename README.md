@@ -91,6 +91,11 @@ Users can:
 - Refund Policy.
 - More Admin functionality.
 - More Payment Methods like Checks.
+- More Car Types:
+
+![alt text](./images/Types-of-Cars.webp)
+
+
 
 ---
 
