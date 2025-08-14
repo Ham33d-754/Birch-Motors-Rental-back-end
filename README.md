@@ -1,12 +1,12 @@
 # 🚗 Birch Motors
 
-![alt text](image-2.png)
+![alt text](./images/Birch-motor-rental%20logo.jpeg)
 
 Welcome to **Birch Motors App**, a sleek and modern web platform built for showcasing and managing car renting. This project demonstrates full-stack development with strong focus on functionality, clean UI, and scalability.
 
 ---
 
-## 🔗 Connect With us
+## 🔗 Connect With Us
 
 - 👤 **Name:** Fawaz Aljar
 - 💼 [LinkedIn](https://www.linkedin.com/in/aljar/)
@@ -53,14 +53,13 @@ Users can:
 
 | Technology        | Purpose                   |
 | ----------------- | ------------------------- |
-| React.js          | Frontend UI               |
 | Node.js & Express | Backend API               |
 | MongoDB           | Database                  |
 | Mongoose          | ORM for MongoDB           |
 | Insonmia          | Testing Back-End          |
-| CSS               | Styling                   |
 | JWT               | User authentication       |
 | Trello            | Task & Project Management |
+| Stripe            | Payment Method            |
 
 ---
 
@@ -78,11 +77,7 @@ Users can:
 
 📌 [Front-End](https://github.com/Ham33d-754/Birch-Motors-Rental-front-end.git)
 
-### 🧩 Back-End GitHub:
-
-📌 [Back-End](https://github.com/Ham33d-754/Birch-Motors-Rental-back-end.git)
-
-### Demo Accounts
+### Example of Accounts
 
 | Role    | Username | Password    |
 | ------- | -------- | ----------- |
@@ -92,34 +87,25 @@ Users can:
 
 ## 🔮 Future Enchancements
 
-- Booking Cancellation
-- Refund Policy
-- more Admin functionality
+- Booking Cancellation.
+- Refund Policy.
+- More Admin functionality.
+- More Payment Methods like Checks.
 
 ---
 
-## 🖼 ScreenShots
-
 ## ERD
 
-![alt text](image-1.png)
+![alt text](./images/ERD4.png)
 
 ## Hericky Diagram
 
-![alt text](image.png)
-
-[WireFrames](https://drive.google.com/drive/folders/1HD_D0V6IDMcSgwhrGkpt2461EwxhOd0N?usp=sharing)
+![alt text](./images/CHD4.png)
 
 ---
 
 ## 🙌 Credits
 
 - [Stripe Payment Method](https://stripe.com/)
-
----
-
-- 👤 **Fawaz Aljar**
-- 👤 **Feras Albuflasa**
-- 👤 **Mahmood Ali**
 
 ---
