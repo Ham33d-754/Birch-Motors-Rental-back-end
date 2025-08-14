@@ -20,7 +20,7 @@ Welcome to **Birch Motors App**, a sleek and modern web platform built for showc
 
 ---
 
-- 👤 **Name:** Mahmood Ali
+- 👤 **Name:** Mahmood Abdulnabi
 - 💼 [LinkedIn](https://www.linkedin.com/in/mahmood-abdulnabi/)
 - 🐙 [GitHub](https://github.com/Ham33d-754)
 
@@ -53,10 +53,12 @@ Users can:
 
 | Technology        | Purpose                   |
 | ----------------- | ------------------------- |
+| React.js          | Frontend UI               |
 | Node.js & Express | Backend API               |
 | MongoDB           | Database                  |
 | Mongoose          | ORM for MongoDB           |
 | Insonmia          | Testing Back-End          |
+| CSS               | Styling                   |
 | JWT               | User authentication       |
 | Trello            | Task & Project Management |
 | Stripe            | Payment Method            |
@@ -95,17 +97,11 @@ Users can:
 
 ![alt text](./images/Types-of-Cars.webp)
 
-
-
 ---
 
 ## ERD
 
 ![alt text](./images/ERD4.png)
-
-## Hericky Diagram
-
-![alt text](./images/CHD4.png)
 
 ---
 
